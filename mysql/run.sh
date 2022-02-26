@@ -34,6 +34,8 @@ services:
   db-mysql:
     image: mysql:oracle
     container_name: db-mysql
+    depends_on:
+      - nginx-proxy
     volumes:
        - ${MYSQLDATA_PATH}:/var/lib/mysql
     restart: always
@@ -45,6 +47,8 @@ services:
   db-phpmyadmin:
     image: arm64v8/phpmyadmin
     container_name: db-phpmyadmin
+    depends_on:
+      - nginx-proxy
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=db-mysql
