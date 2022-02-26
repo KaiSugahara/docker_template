@@ -13,6 +13,7 @@
 
 ## データサイエンス
 - UbuntuイメージベースにJupyterLab環境を構築
+
 | template_name | image(s) | 説明 | 注意 |
 | :---: | :---: | :---: | :---: |
 | ubuntu_jupyter | `ubuntu:latest` | - | - |
