@@ -1,5 +1,5 @@
 # READ
-echo "カレントディレクトリに mysql を作成し、MySQLデータのマウント先としてよろしいですか？ [y/n]"
+echo "カレントディレクトリに mysql を作成し、MySQLデータのマウント先として良いですか？ [y/n]"
 read -p "> " MYSQLDATA_PATH_FLAG
 case $MYSQLDATA_PATH_FLAG in
     y)
@@ -11,7 +11,7 @@ case $MYSQLDATA_PATH_FLAG in
         ;;
 esac
 
-echo "カレントディレクトリに phpmyadmin を作成し、セッションデータのマウント先としてよろしいですか？ [y/n]"
+echo "カレントディレクトリに phpmyadmin を作成し、セッションデータのマウント先として良いですか？ [y/n]"
 read -p "> " PHPMYADMIN_PATH_FLAG
 case $PHPMYADMIN_PATH_FLAG in
     y)
@@ -68,3 +68,4 @@ EOF
 
 # RUN CONTAINER(S)
 docker-compose up -d
+rm docker-compose.yml

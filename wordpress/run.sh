@@ -66,3 +66,4 @@ EOF
 
 # RUN CONTAINER(S)
 docker-compose up -d
+rm docker-compose.yml

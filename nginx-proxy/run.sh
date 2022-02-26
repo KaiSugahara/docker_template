@@ -1,5 +1,5 @@
 # READ
-echo "カレントディレクトリに certs を作成し、証明書ファイルのマウント先としてよろしいですか？ [y/n]"
+echo "カレントディレクトリに certs を作成し、証明書ファイルのマウント先として良いですか？ [y/n]"
 read -p "> " CERT_PATH_FLAG
 case $CERT_PATH_FLAG in
     y)
@@ -47,3 +47,4 @@ EOF
 
 # RUN CONTAINER(S)
 docker-compose up -d
+rm docker-compose.yml
