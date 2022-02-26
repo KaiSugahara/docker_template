@@ -10,3 +10,9 @@
 | nginx-proxy | `jwilder/nginx-proxy:latest`<br>`rcs/letsencrypt-nginx-proxy-companion:latest` | - | リバースプロキシ<br>Let’s EncryptのSSL証明書 | - |
 | mysql | `mysql:oracle`<br>`arm64v8/phpmyadmin` | `nginx-proxy` | MySQL<br>phpmyadmin | ARMアーキテクチャ用のdockerイメージを使用。環境に合わせて編集してください。 |
 | wordpress | `wordpress:latest` | `mysql`<br>`nginx-proxy` | WordPress | - |
+
+## データサイエンス
+- UbuntuイメージベースにJupyterLab環境を構築
+| template_name | image(s) | 説明 | 注意 |
+| :---: | :---: | :---: | :---: |
+| ubuntu_jupyter | `ubuntu:latest` | - | - |
