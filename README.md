@@ -9,3 +9,4 @@
 | :---: | :---: | :---: | :---: | :---: |
 | nginx-proxy | jwilder/nginx-proxy:latest<br>jrcs/letsencrypt-nginx-proxy-companion:latest | - | リバースプロキシ<br>Let’s EncryptのSSL証明書 | - |
 | mysql | mysql:oracle<br>arm64v8/phpmyadmin | nginx-proxy | MySQL<br>phpmyadmin | ARMアーキテクチャ用のdockerイメージを使用。環境に合わせて編集してください。 |
+| wordpress | wordpress:latest | mysql, nginx-proxy | WordPress | - |
