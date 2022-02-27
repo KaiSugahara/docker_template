@@ -23,29 +23,32 @@ RUN echo "Acquire::https::Proxy \"${HTTPS_PROXY}\";" >> /etc/apt/apt.conf
 RUN /bin/bash
 RUN apt update
 RUN apt-get update
-RUN apt install sudo
-RUN echo y | apt install python3-pip
+RUN apt -y install tzdata
+ENV TZ=Asia/Tokyo
+RUN apt -y install sudo expect python3-pip emacs
 
 # USERADD
 RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} ${CONTAINER_USER_NAME}
 RUN gpasswd -a ${CONTAINER_USER_NAME} sudo
 
-# MAKE BACKUP DIR
-RUN mkdir /backup
-RUN chown ${YOUR_UID} /backup
-
 # CHANGE USER
 USER ${YOUR_UID}
-WORKDIR /home/${CONTAINER_USER_NAME}
+
+# MAKE WORK DIR
+RUN mkdir -p $HOME/jupyter
+WORKDIR /home/${CONTAINER_USER_NAME}/jupyter
 
 # ADD BASHRC
-RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> .bashrc
-RUN source .bashrc
+RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
 
 # INSTALL JUPYTER
 RUN pip3 install jupyterlab
 
-# INSTALL TO BACKUP DIR
-RUN cp -r /home/${CONTAINER_USER_NAME}/. /backup/
+# JUPYTER SETTINGS
+RUN $HOME/.local/bin/jupyter lab --generate-config
+RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> $HOME/.jupyter/jupyter_lab_config.py
+RUN echo "c.NotebookApp.open_browser = False" >> $HOME/.jupyter/jupyter_lab_config.py
+RUN echo "c.NotebookApp.port = 8888" >> $HOME/.jupyter/jupyter_lab_config.py
+RUN echo "c.NotebookApp.token = ''" >> $HOME/.jupyter/jupyter_lab_config.py
 
 EXPOSE 8888

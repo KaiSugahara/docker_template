@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # READ
 echo "作成したいコンテナ名を入力してください（入力例「your_name_ubuntu」）"
 read -p "> " CONTAINER_NAME
@@ -49,7 +51,7 @@ services:
       - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
       - https_proxy=${JUPYTER_HTTPS_PROXY}
     volumes:
-      - ${MOUNT_PATH}:/home/${CONTAINER_USER_NAME}
+      - ${MOUNT_PATH}:/home/${CONTAINER_USER_NAME}/jupyter
 EOF
 
 # RUN CONTAINER(S)
