@@ -16,4 +16,4 @@
 
 | template_name | image(s) | 説明 | 注意 |
 | :---: | :---: | :---: | :---: |
-| ubuntu_jupyter | `ubuntu:latest` | - | - |
+| jupyter_on_ubuntu | `ubuntu:latest` | - | - |
