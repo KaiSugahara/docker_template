@@ -25,7 +25,7 @@ RUN apt update
 RUN apt-get update
 RUN apt -y install tzdata
 ENV TZ=Asia/Tokyo
-RUN apt -y install sudo expect python3-pip emacs
+RUN apt -y install sudo python3-pip emacs
 
 # USERADD
 RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} ${CONTAINER_USER_NAME}
