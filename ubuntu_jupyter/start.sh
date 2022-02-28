@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 
 # Jupyterの起動
 if type "jupyter" > /dev/null 2>&1; then
