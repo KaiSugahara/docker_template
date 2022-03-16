@@ -66,6 +66,17 @@ networks:
     name: nginx-network
 EOF
 
+# EXPORT phpmyadmin-misc.ini
+mkdir -p ${PHPMYADMIN_PATH}
+cat << EOF > ${PHPMYADMIN_PATH}/phpmyadmin-misc.ini
+allow_url_fopen = Off
+max_execution_time = 300
+max_input_vars=10000
+memory_limit = 64M
+post_max_size = 64M
+upload_max_filesize = 64M
+EOF
+
 # RUN CONTAINER(S)
 docker-compose up -d
 rm docker-compose.yml
