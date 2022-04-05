@@ -29,6 +29,7 @@ ENV TZ=Asia/Tokyo
 RUN apt -y install sudo python3-pip emacs
 
 # USERADD
+RUN groupadd -g ${YOUR_GID} ${CONTAINER_USER_NAME}
 RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} -g ${YOUR_GID} ${CONTAINER_USER_NAME}
 RUN gpasswd -a ${CONTAINER_USER_NAME} sudo
 
