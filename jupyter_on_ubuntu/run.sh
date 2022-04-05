@@ -1,21 +1,14 @@
 #!/bin/bash
 
 # READ
+YOUR_UID=`id -u`
+CONTAINER_USER_NAME=`id -un`
+
 echo "作成したいコンテナ名を入力してください（入力例「your_name_ubuntu」）"
 read -p "> " CONTAINER_NAME
 
-echo "コンテナ内の実行ユーザー名を入力してください（入力例「user」）"
-read -p "> " CONTAINER_USER_NAME
-
-echo "あなたのUIDを入力してください"
-read -p "> " YOUR_UID
-
 echo "Jupyterに接続するためのポート番号を入力してください"
 read -p "> " JUPYTER_PORT
-
-echo "マウントしたいホストのディレクトリのパスを入力してください（推奨：あなたのホームディレクトリ）"
-read -p "> " MOUNT_PATH
-mkdir -p $MOUNT_PATH
 
 echo "HTTP_PROXYを入力してください（指定しない場合はそのままEnter）"
 read -p "> " JUPYTER_HTTP_PROXY
@@ -51,7 +44,7 @@ services:
       - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
       - https_proxy=${JUPYTER_HTTPS_PROXY}
     volumes:
-      - ${MOUNT_PATH}:/home/${CONTAINER_USER_NAME}/h_dir
+      - ${HOME}:/home/${CONTAINER_USER_NAME}/h_dir
 EOF
 
 # RUN CONTAINER(S)
