@@ -2,6 +2,7 @@
 
 # READ
 YOUR_UID=`id -u`
+YOUR_GID=`id -g`
 CONTAINER_USER_NAME=`id -un`
 
 echo "作成したいコンテナ名を入力してください（入力例「your_name_ubuntu」）"
@@ -32,6 +33,7 @@ services:
         - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
         - https_proxy=${JUPYTER_HTTPS_PROXY}
         - YOUR_UID=${YOUR_UID}
+        - YOUR_GID=${YOUR_GID}
         - CONTAINER_USER_NAME=${CONTAINER_USER_NAME}
     image: ${IMAGE_NAME}
     container_name: ${CONTAINER_NAME}

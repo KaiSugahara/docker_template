@@ -5,6 +5,7 @@ USER root
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
 ARG YOUR_UID
+ARG YOUR_GID
 ARG CONTAINER_USER_NAME
 
 # ADD FILES
@@ -28,7 +29,7 @@ ENV TZ=Asia/Tokyo
 RUN apt -y install sudo python3-pip emacs
 
 # USERADD
-RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} ${CONTAINER_USER_NAME}
+RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} -g ${YOUR_GID} ${CONTAINER_USER_NAME}
 RUN gpasswd -a ${CONTAINER_USER_NAME} sudo
 
 # CHANGE USER
