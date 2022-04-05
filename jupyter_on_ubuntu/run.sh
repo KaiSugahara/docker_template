@@ -13,7 +13,7 @@ read -p "> " YOUR_UID
 echo "Jupyterに接続するためのポート番号を入力してください"
 read -p "> " JUPYTER_PORT
 
-echo "マウントしたいホストのディレクトリのパスを入力してください（ホームディレクトリは避けてください）"
+echo "マウントしたいホストのディレクトリのパスを入力してください（推奨：あなたのホームディレクトリ）"
 read -p "> " MOUNT_PATH
 mkdir -p $MOUNT_PATH
 
@@ -51,7 +51,7 @@ services:
       - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
       - https_proxy=${JUPYTER_HTTPS_PROXY}
     volumes:
-      - ${MOUNT_PATH}:/home/${CONTAINER_USER_NAME}/jupyter
+      - ${MOUNT_PATH}:/home/${CONTAINER_USER_NAME}/h_dir
 EOF
 
 # RUN CONTAINER(S)

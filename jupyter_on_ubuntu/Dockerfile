@@ -34,9 +34,8 @@ RUN gpasswd -a ${CONTAINER_USER_NAME} sudo
 # CHANGE USER
 USER ${YOUR_UID}
 
-# MAKE WORK DIR
-RUN mkdir -p $HOME/jupyter
-WORKDIR /home/${CONTAINER_USER_NAME}/jupyter
+# CHANGE WORK DIR
+WORKDIR /home/${CONTAINER_USER_NAME}
 
 # ADD BASHRC
 RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
