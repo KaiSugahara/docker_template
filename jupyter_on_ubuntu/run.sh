@@ -46,7 +46,7 @@ services:
       - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
       - https_proxy=${JUPYTER_HTTPS_PROXY}
     volumes:
-      - ${HOME}:/home/${CONTAINER_USER_NAME}/h_dir
+      - ${HOME}:/home/${CONTAINER_USER_NAME}/HOST_HOME
 EOF
 
 # RUN CONTAINER(S)
