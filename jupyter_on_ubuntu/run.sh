@@ -11,11 +11,8 @@ read -p "> " CONTAINER_NAME
 echo "Jupyterに接続するためのポート番号を入力してください"
 read -p "> " JUPYTER_PORT
 
-echo "HTTP_PROXYを入力してください（指定しない場合はそのままEnter）"
+echo "HTTP(S)_PROXYを入力してください（指定しない場合はそのままEnter）"
 read -p "> " JUPYTER_HTTP_PROXY
-
-echo "HTTPS_PROXYを入力してください（指定しない場合はそのままEnter）"
-read -p "> " JUPYTER_HTTPS_PROXY
 
 echo "保存するイメージ名を入力してください（入力例「your_name/ubuntu」）"
 read -p "> " IMAGE_NAME
@@ -29,9 +26,6 @@ services:
       context: .
       args:
         - HTTP_PROXY=${JUPYTER_HTTP_PROXY}
-        - http_proxy=${JUPYTER_HTTP_PROXY}
-        - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
-        - https_proxy=${JUPYTER_HTTPS_PROXY}
         - YOUR_UID=${YOUR_UID}
         - YOUR_GID=${YOUR_GID}
         - CONTAINER_USER_NAME=${CONTAINER_USER_NAME}
@@ -43,10 +37,10 @@ services:
     environment:
       - HTTP_PROXY=${JUPYTER_HTTP_PROXY}
       - http_proxy=${JUPYTER_HTTP_PROXY}
-      - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
-      - https_proxy=${JUPYTER_HTTPS_PROXY}
+      - HTTPS_PROXY=${JUPYTER_HTTP_PROXY}
+      - https_proxy=${JUPYTER_HTTP_PROXY}
     volumes:
-      - ${HOME}:/home/${CONTAINER_USER_NAME}/HOST_HOME
+      - ${HOME}:/home/${CONTAINER_USER_NAME}/@HOST_HOME
 EOF
 
 # RUN CONTAINER(S)
