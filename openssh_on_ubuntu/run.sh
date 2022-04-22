@@ -29,9 +29,6 @@ services:
       context: .
       args:
         - HTTP_PROXY=${JUPYTER_HTTP_PROXY}
-        - http_proxy=${JUPYTER_HTTP_PROXY}
-        - HTTPS_PROXY=${JUPYTER_HTTP_PROXY}
-        - https_proxy=${JUPYTER_HTTP_PROXY}
         - YOUR_UID=${YOUR_UID}
         - YOUR_GID=${YOUR_GID}
         - CONTAINER_USER_NAME=${CONTAINER_USER_NAME}
