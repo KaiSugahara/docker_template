@@ -47,6 +47,8 @@ WORKDIR /home/${CONTAINER_USER_NAME}
 
 # ADD BASHRC
 RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
+RUN echo "export HTTP_PROXY=${HTTP_PROXY}" >> $HOME/.bashrc
+RUN echo "export HTTPS_PROXY=${HTTP_PROXY}" >> $HOME/.bashrc
 
 # INSTALL JUPYTER
 RUN pip3 install jupyterlab
