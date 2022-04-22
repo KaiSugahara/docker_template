@@ -3,6 +3,7 @@ USER root
 
 # ARGS
 ARG HTTP_PROXY
+ARG HTTPS_PROXY
 ARG YOUR_UID
 ARG YOUR_GID
 ARG CONTAINER_USER_NAME
@@ -26,7 +27,7 @@ RUN apt update
 RUN apt-get update
 RUN apt -y install tzdata
 ENV TZ=Asia/Tokyo
-RUN apt -y install sudo python3-pip openssh-server
+RUN apt -y install sudo python3-pip openssh-server language-pack-ja-base language-pack-ja
 RUN mkdir /var/run/sshd
 
 # USERADD
@@ -48,6 +49,7 @@ WORKDIR /home/${CONTAINER_USER_NAME}
 RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
 RUN echo "export HTTP_PROXY=${HTTP_PROXY}" >> $HOME/.bashrc
 RUN echo "export HTTPS_PROXY=${HTTP_PROXY}" >> $HOME/.bashrc
+RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 
 # INSTALL JUPYTER
 RUN pip3 install jupyterlab
