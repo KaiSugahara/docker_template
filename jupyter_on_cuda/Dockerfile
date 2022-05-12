@@ -26,6 +26,8 @@ RUN /bin/bash
 RUN apt update
 RUN apt-get update
 ENV DEBIAN_FRONTEND=noninteractive
+RUN apt -y install tzdata
+ENV TZ=Asia/Tokyo
 RUN apt -y install sudo python3-pip openssh-server language-pack-ja-base language-pack-ja
 RUN mkdir /var/run/sshd
 
