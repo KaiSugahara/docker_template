@@ -8,7 +8,7 @@ CONTAINER_USER_NAME=`id -un`
 echo "作成したいコンテナ名を入力してください（入力例「your_name_ubuntu」）"
 read -p "> " CONTAINER_NAME
 
-echo "コンテナユーザのパスワードを入力してください（プライバシー保護のため表示されません）"
+echo "コンテナユーザのパスワードを入力してください（入力は非表示になっています）"
 read -sp "$ " CONTAINER_USER_PASSWORD
 
 echo "sshで接続するためのポート番号を入力してください"
