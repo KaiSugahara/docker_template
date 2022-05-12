@@ -42,10 +42,17 @@ services:
     environment:
       - HTTP_PROXY=${JUPYTER_HTTP_PROXY}
       - http_proxy=${JUPYTER_HTTP_PROXY}
-      - HTTPS_PROXY=${JUPYTER_HTTP_PROXY}
-      - https_proxy=${JUPYTER_HTTP_PROXY}
+      - HTTPS_PROXY=${JUPYTER_HTTPS_PROXY}
+      - https_proxy=${JUPYTER_HTTPS_PROXY}
     volumes:
       - ${HOME}:/home/${CONTAINER_USER_NAME}/@HOST_HOME
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 EOF
 
 # RUN CONTAINER(S)
