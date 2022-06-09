@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:latest
+FROM nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04
 USER root
 
 # ARGS
@@ -54,6 +54,9 @@ RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 
 # INSTALL JUPYTER
 RUN pip3 install jupyterlab
+
+# INSTALL PYTORCH
+RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
 
 # JUPYTER SETTINGS
 RUN $HOME/.local/bin/jupyter lab --generate-config
