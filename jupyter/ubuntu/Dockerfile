@@ -7,6 +7,7 @@ ARG HTTPS_PROXY
 ARG YOUR_UID
 ARG YOUR_GID
 ARG CONTAINER_USER_NAME
+ARG CONTAINER_USER_PASSWORD
 
 # ADD FILES
 ADD start.sh /
@@ -32,6 +33,10 @@ RUN apt -y install sudo python3-pip emacs
 RUN groupadd -g ${YOUR_GID} ${CONTAINER_USER_NAME}
 RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} -g ${YOUR_GID} ${CONTAINER_USER_NAME}
 RUN gpasswd -a ${CONTAINER_USER_NAME} sudo
+
+# CHANGE USER PASSWORD
+RUN echo "root:password" | chpasswd
+RUN echo "${CONTAINER_USER_NAME}:${CONTAINER_USER_PASSWORD}" | chpasswd
 
 # CHANGE USER
 USER ${YOUR_UID}
