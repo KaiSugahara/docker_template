@@ -46,6 +46,7 @@ WORKDIR /home/${CONTAINER_USER_NAME}
 
 # ADD BASHRC
 RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
+RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 
 # INSTALL JUPYTER
 RUN pip3 install jupyterlab
