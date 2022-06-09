@@ -8,6 +8,9 @@ CONTAINER_USER_NAME=`id -un`
 echo "作成したいコンテナ名を入力してください（入力例「your_name_ubuntu」）"
 read -p "> " CONTAINER_NAME
 
+echo "コンテナユーザのパスワードを入力してください（入力は非表示になっています）"
+read -sp "> " CONTAINER_USER_PASSWORD
+
 echo "Jupyterに接続するためのポート番号を入力してください"
 read -p "> " JUPYTER_PORT
 
@@ -30,6 +33,7 @@ services:
         - YOUR_UID=${YOUR_UID}
         - YOUR_GID=${YOUR_GID}
         - CONTAINER_USER_NAME=${CONTAINER_USER_NAME}
+        - CONTAINER_USER_PASSWORD=${CONTAINER_USER_PASSWORD}
     image: ${IMAGE_NAME}
     container_name: ${CONTAINER_NAME}
     ports:
