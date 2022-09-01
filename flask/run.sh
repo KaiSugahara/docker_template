@@ -18,7 +18,7 @@ cat << EOF > docker-compose.yml
 version: '3'
 services:
   ${CONTAINER_NAME}:
-    build: .
+    build: $(cd $(dirname $0); pwd)
     image: ${IMAGE_NAME}
     container_name: ${CONTAINER_NAME}
     restart: always
@@ -35,24 +35,6 @@ networks:
     name: nginx-network
 EOF
 
-# EXPORT Dockerfile
-cat << EOF > Dockerfile
-FROM ubuntu:latest
-USER root
-WORKDIR /app
-# BASH
-SHELL ["/bin/bash", "-c"]
-# UPDATE & INSTALL
-RUN apt update
-RUN apt-get update
-RUN apt -y install tzdata
-ENV TZ=Asia/Tokyo
-RUN apt -y install sudo python3-pip
-RUN pip3 install Flask
-CMD ["python3", "index.py"]
-EOF
-
 # RUN CONTAINER(S)
 docker-compose up -d
 rm docker-compose.yml
-rm Dockerfile
