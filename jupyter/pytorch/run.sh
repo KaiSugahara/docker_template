@@ -38,7 +38,6 @@ services:
     container_name: ${CONTAINER_NAME}
     ports:
       - '${JUPYTER_PORT}:8888'
-    restart: always
     environment:
       - HTTP_PROXY=${JUPYTER_HTTP_PROXY}
       - http_proxy=${JUPYTER_HTTP_PROXY}
