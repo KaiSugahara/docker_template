@@ -12,7 +12,7 @@
 | wordpress | `wordpress:latest` | `mysql`<br>`nginx-proxy` | WordPress | - |
 | flask | `ubuntu:latest` | - | - | - |
 
-## データサイエンス
+## ML
 - UbuntuイメージベースにJupyterLab環境を構築
 
 | template_name | base-image(s) | CPU | GPU | JupyterLab | VSCode（Remote Development） |
