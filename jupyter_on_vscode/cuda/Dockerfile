@@ -2,8 +2,6 @@ FROM nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04
 USER root
 
 # ARGS
-ARG HTTP_PROXY
-ARG HTTPS_PROXY
 ARG YOUR_UID
 ARG YOUR_GID
 ARG CONTAINER_USER_NAME
@@ -16,10 +14,6 @@ CMD ["/start.sh"]
 
 # BASH
 SHELL ["/bin/bash", "-c"]
-
-# APT PROXY SETTING
-RUN echo "Acquire::http::Proxy \"${HTTP_PROXY}\";" >> /etc/apt/apt.conf
-RUN echo "Acquire::https::Proxy \"${HTTPS_PROXY}\";" >> /etc/apt/apt.conf
 
 # UPDATE & INSTALL
 RUN /bin/bash
@@ -48,8 +42,6 @@ WORKDIR /home/${CONTAINER_USER_NAME}
 
 # ADD BASHRC
 RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
-RUN echo "export HTTP_PROXY=${HTTP_PROXY}" >> $HOME/.bashrc
-RUN echo "export HTTPS_PROXY=${HTTP_PROXY}" >> $HOME/.bashrc
 RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 
 # INSTALL JUPYTER
