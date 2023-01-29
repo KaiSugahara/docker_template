@@ -19,4 +19,4 @@ read -p "> " IMAGE_NAME
 export CONTAINER_NAME CONTAINER_USER_PASSWORD JUPYTER_PORT IMAGE_NAME
 
 # RUN DOCKER-COMPOSE
-docker-compose up -d
+docker-compose -p $CONTAINER_NAME up -d
