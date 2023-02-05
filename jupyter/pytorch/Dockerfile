@@ -22,7 +22,7 @@ RUN apt-get update
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt -y install tzdata
 ENV TZ=Asia/Tokyo
-RUN apt -y install sudo python3-pip emacs language-pack-ja-base language-pack-ja
+RUN apt -y install sudo python3-pip emacs language-pack-ja-base language-pack-ja git
 
 # USERADD
 RUN groupadd -g ${YOUR_GID} ${CONTAINER_USER_NAME}
@@ -44,7 +44,7 @@ RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
 RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 
 # INSTALL JUPYTER
-RUN pip3 install jupyterlab
+RUN pip3 install jupyterlab jupyterlab-git
 
 # INSTALL PYTORCH
 RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
