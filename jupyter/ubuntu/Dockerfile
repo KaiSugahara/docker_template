@@ -52,4 +52,8 @@ RUN echo "c.NotebookApp.open_browser = False" >> $HOME/.jupyter/jupyter_lab_conf
 RUN echo "c.NotebookApp.port = 8888" >> $HOME/.jupyter/jupyter_lab_config.py
 RUN echo "c.NotebookApp.token = ''" >> $HOME/.jupyter/jupyter_lab_config.py
 
+# INSTALL LIBRARIES
+COPY requirements.txt /home/${CONTAINER_USER_NAME}
+RUN pip3 install -r requirements.txt
+
 EXPOSE 8888
