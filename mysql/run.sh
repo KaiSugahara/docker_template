@@ -1,82 +1,10 @@
-# READ
-echo "カレントディレクトリに mysql を作成し、MySQLデータのマウント先として良いですか？ [y/n]"
-read -p "> " MYSQLDATA_PATH_FLAG
-case $MYSQLDATA_PATH_FLAG in
-    y)
-        MYSQLDATA_PATH="./mysql"
-        ;;
-    *)
-        echo "MySQLデータのマウント先のパスを入力してください（入力形式例「./mysql」）"
-        read -p "> " MYSQLDATA_PATH
-        ;;
-esac
+#!/bin/bash
 
-echo "カレントディレクトリに phpmyadmin を作成し、セッションデータのマウント先として良いですか？ [y/n]"
-read -p "> " PHPMYADMIN_PATH_FLAG
-case $PHPMYADMIN_PATH_FLAG in
-    y)
-        PHPMYADMIN_PATH="./phpmyadmin"
-        ;;
-    *)
-        echo "MySQLデータのマウント先のパスを入力してください（入力形式例「./phpmyadmin」）"
-        read -p "> " PHPMYADMIN_PATH
-        ;;
-esac
-
+# EXPORT VARIABLE(S)
 echo "phpmyadminにログインしたいポート番号を入力してください"
 read -p "> " PHPMYADMIN_PORT
 
-# EXPORT docker-compose.yml
-cat << EOF > docker-compose.yml
-version: '3'
+export PHPMYADMIN_PORT
 
-services:
-  db-mysql:
-    image: mysql:oracle
-    container_name: db-mysql
-    depends_on:
-      - nginx-proxy
-    volumes:
-       - ${MYSQLDATA_PATH}:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-
-  db-phpmyadmin:
-    image: arm64v8/phpmyadmin
-    container_name: db-phpmyadmin
-    depends_on:
-      - nginx-proxy
-    environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOST=db-mysql
-      - PMA_USER=root
-      - PMA_PASSWORD=wordpress
-    ports:
-      - ${PHPMYADMIN_PORT}:80
-    volumes:
-      - ${PHPMYADMIN_PATH}/sessions:/sessions
-      - ${PHPMYADMIN_PATH}/phpmyadmin-misc.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
-
-networks:
-  default:
-    external: true
-    name: nginx-network
-EOF
-
-# EXPORT phpmyadmin-misc.ini
-mkdir -p ${PHPMYADMIN_PATH}
-cat << EOF > ${PHPMYADMIN_PATH}/phpmyadmin-misc.ini
-allow_url_fopen = Off
-max_execution_time = 300
-max_input_vars=10000
-memory_limit = 64M
-post_max_size = 64M
-upload_max_filesize = 64M
-EOF
-
-# RUN CONTAINER(S)
+# RUN DOCKER-COMPOSE
 docker-compose up -d
-rm docker-compose.yml
