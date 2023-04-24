@@ -12,6 +12,7 @@ services:
       - /etc/nginx/vhost.d
       - /usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./network_internal.conf:/etc/nginx/network_internal.conf
     restart: always
   nginx-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
