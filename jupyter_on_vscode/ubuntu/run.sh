@@ -19,4 +19,5 @@ read -p "> " IMAGE_NAME
 export CONTAINER_NAME CONTAINER_USER_PASSWORD SSH_PORT IMAGE_NAME
 
 # RUN CONTAINER(S)
+docker-compose build --no-cache
 docker-compose -p $CONTAINER_NAME up -d
