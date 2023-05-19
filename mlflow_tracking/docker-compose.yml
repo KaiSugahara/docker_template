@@ -25,8 +25,7 @@ services:
       --port ${TRACKING_PORT}
     volumes:
       - ./mlflow:/var/mlflow
-    networks:
-      - mlflow-network
+
   sql:
     image: mysql:oracle
     restart: always
@@ -38,8 +37,6 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
       - ./timeout.cnf:/etc/mysql/conf.d/timeout.cnf
-    networks:
-      - mlflow-network
   minio:
     image: minio/minio
     restart: always
@@ -49,8 +46,6 @@ services:
       MINIO_ACCESS_KEY: minio-access-key
       MINIO_SECRET_KEY: minio-secret-key
     command: server /export
-    networks:
-      - mlflow-network
   defaultbucket:
     image: minio/mc
     depends_on:
@@ -62,9 +57,7 @@ services:
       /usr/bin/mc policy download myminio/default;
       exit 0;
       "
-    networks:
-      - mlflow-network
 
 networks:
-  mlflow-network:
-    name: mlflow-network
+  default:
+    name: ${PROJECT_NAME}-network
