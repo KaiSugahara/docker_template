@@ -1,6 +1,6 @@
 version: "3"
 services:
-  mlflow:
+  tracking:
     image: mlflow
     build:
       context: .
