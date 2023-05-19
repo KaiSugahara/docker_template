@@ -9,7 +9,7 @@ services:
       - ${TRACKING_PORT}:${TRACKING_PORT}
     restart: always
     depends_on:
-      - mlflowsql
+      - sql
       - minio
     environment:
       MLFLOW_S3_ENDPOINT_URL: http://minio:9000
@@ -18,7 +18,7 @@ services:
       NETWORK_ACCESS: internal
     command: >
       mlflow server
-      --backend-store-uri 'mysql://mlflowuser:mlflowpassword@mlflowsql:3306/mlflowdb'
+      --backend-store-uri 'mysql://mlflowuser:mlflowpassword@sql:3306/mlflowdb'
       --artifacts-destination 's3://default/artifacts'
       --serve-artifacts
       --host 0.0.0.0
@@ -27,7 +27,7 @@ services:
       - ./mlflow:/var/mlflow
     networks:
       - mlflow-network
-  mlflowsql:
+  sql:
     image: mysql:oracle
     restart: always
     environment:
