@@ -24,7 +24,7 @@ services:
       --host 0.0.0.0
       --port ${TRACKING_PORT}
     volumes:
-      - ./mlflow:/var/mlflow
+      - ./${PROJECT_NAME}/mlflow:/var/mlflow
 
   sql:
     image: mysql:oracle
@@ -35,13 +35,13 @@ services:
       MYSQL_USER: mlflowuser
       MYSQL_PASSWORD: mlflowpassword
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./${PROJECT_NAME}/mysql:/var/lib/mysql
       - ./timeout.cnf:/etc/mysql/conf.d/timeout.cnf
   minio:
     image: minio/minio
     restart: always
     volumes:
-     - ./minio1:/export
+     - ./${PROJECT_NAME}/minio1:/export
     environment:
       MINIO_ACCESS_KEY: minio-access-key
       MINIO_SECRET_KEY: minio-secret-key
