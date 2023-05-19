@@ -19,7 +19,8 @@ services:
     command: >
       mlflow server
       --backend-store-uri 'mysql://mlflowuser:mlflowpassword@mlflowsql:3306/mlflowdb'
-      --default-artifact-root 's3://default/'
+      --artifacts-destination 's3://default/artifacts'
+      --serve-artifacts
       --host 0.0.0.0
       --port 5000
     volumes:
@@ -41,8 +42,6 @@ services:
       - mlflow-network
   minio:
     image: minio/minio
-    ports:
-      - 9000:9000
     restart: always
     volumes:
      - ./minio1:/export
