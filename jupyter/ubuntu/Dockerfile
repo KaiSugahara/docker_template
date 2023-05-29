@@ -45,13 +45,6 @@ RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 # INSTALL JUPYTER
 RUN pip3 install jupyterlab jupyterlab-git
 
-# JUPYTER SETTINGS
-RUN $HOME/.local/bin/jupyter lab --generate-config
-RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> $HOME/.jupyter/jupyter_lab_config.py
-RUN echo "c.NotebookApp.open_browser = False" >> $HOME/.jupyter/jupyter_lab_config.py
-RUN echo "c.NotebookApp.port = 8888" >> $HOME/.jupyter/jupyter_lab_config.py
-RUN echo "c.NotebookApp.token = ''" >> $HOME/.jupyter/jupyter_lab_config.py
-
 # INSTALL LIBRARIES
 COPY requirements.txt /home/${CONTAINER_USER_NAME}
 RUN pip3 install -r requirements.txt
