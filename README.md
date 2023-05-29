@@ -17,9 +17,9 @@
 
 | template_name | base-image(s) | CPU | GPU | JupyterLab | VSCode（Remote Development） |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| jupyter/ubuntu | `ubuntu` | ○ | × | ○ | × |
-| jupyter/cuda | `nvidia/cuda` | ○ | ○ | ○ | × |
-| jupyter/pytorch | `nvidia/cuda` | ○ | ○ | ○ | × |
-| jupyter_on_vscode/ubuntu | `ubuntu` | ○ | × | ○ | ○ |
-| jupyter_on_vscode/cuda | `nvidia/cuda` | ○ | ○ | ○ | ○ |
-| jupyter_on_vscode/pytorch | `nvidia/cuda` | ○ | ○ | ○ | ○ |
+| jupyter/lab/ubuntu | `ubuntu` | ○ | × | ○ | × |
+| jupyter/lab/cuda | `nvidia/cuda` | ○ | ○ | ○ | × |
+| jupyter/lab/pytorch | `nvidia/cuda` | ○ | ○ | ○ | × |
+| jupyter/vscode/ubuntu | `ubuntu` | ○ | × | ○ | ○ |
+| jupyter/vscode/cuda | `nvidia/cuda` | ○ | ○ | ○ | ○ |
+| jupyter/vscode/pytorch | `nvidia/cuda` | ○ | ○ | ○ | ○ |
