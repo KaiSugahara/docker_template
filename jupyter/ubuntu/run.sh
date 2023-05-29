@@ -22,6 +22,9 @@ CONTAINER_USER_PASSWORD=`openssl passwd -6 -salt $(openssl rand -base64 6) ${CON
 # EXPORT
 export CONTAINER_NAME CONTAINER_USER_PASSWORD JUPYTER_PORT IMAGE_NAME
 
+# MAKE FOR JUPYTER CONFIG
+mkdir -p $HOME/.jupyter
+
 # RUN DOCKER-COMPOSE
 docker-compose build --no-cache
 docker-compose -p $CONTAINER_NAME up -d
