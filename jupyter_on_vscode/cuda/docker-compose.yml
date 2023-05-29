@@ -14,6 +14,7 @@ services:
       - '${SSH_PORT}:22'
     volumes:
       - ${HOME}:/home/${CONTAINER_USER_NAME}/@HOST_HOME
+      - ${HOME}/.jupyter:/home/${CONTAINER_USER_NAME}/.jupyter
     deploy:
       resources:
         reservations:
