@@ -16,6 +16,10 @@ read -p "> " SSH_PORT
 echo "作成するイメージ名を入力してください（入力例「your_name/pytorch」）"
 read -p "> " IMAGE_NAME
 
+# ENCRYPT PASSWORD
+CONTAINER_USER_PASSWORD=`openssl passwd -6 -salt $(openssl rand -base64 6) ${CONTAINER_USER_PASSWORD}`
+
+# EXPORT
 export CONTAINER_NAME CONTAINER_USER_PASSWORD SSH_PORT IMAGE_NAME
 
 # RUN CONTAINER(S)
