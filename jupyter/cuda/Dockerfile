@@ -31,7 +31,7 @@ RUN gpasswd -a ${CONTAINER_USER_NAME} sudo
 
 # CHANGE USER PASSWORD
 RUN echo "root:password" | chpasswd
-RUN echo "${CONTAINER_USER_NAME}:${CONTAINER_USER_PASSWORD}" | chpasswd
+RUN echo "${CONTAINER_USER_NAME}:${CONTAINER_USER_PASSWORD}" | chpasswd -e
 
 # CHANGE USER
 USER ${YOUR_UID}
