@@ -21,7 +21,7 @@ RUN apt update
 RUN apt-get update
 RUN apt -y install tzdata
 ENV TZ=Asia/Tokyo
-RUN apt -y install sudo python3-pip emacs language-pack-ja-base language-pack-ja git
+RUN apt -y install sudo python3-pip language-pack-ja-base language-pack-ja git
 
 # USERADD
 RUN groupadd -g ${YOUR_GID} ${CONTAINER_USER_NAME}
