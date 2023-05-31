@@ -1,3 +1,5 @@
+jupyterlab
+jupyterlab-git
 numpy
 pandas
 scikit-learn

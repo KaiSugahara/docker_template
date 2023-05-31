@@ -41,11 +41,9 @@ WORKDIR /home/${CONTAINER_USER_NAME}
 RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
 RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 
-# INSTALL JUPYTER
-RUN pip3 install jupyterlab jupyterlab-git
-
-# INSTALL LIBRARIES
+# INSTALL JUPYTER & LIBRARIES
 COPY requirements.txt /home/${CONTAINER_USER_NAME}
 RUN pip3 install -r requirements.txt
+RUN rm -f /home/${CONTAINER_USER_NAME}/requirements.txt
 
 EXPOSE 8888
