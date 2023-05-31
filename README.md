@@ -19,7 +19,5 @@
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | jupyter/lab/ubuntu | `ubuntu` | ○ | × | ○ | × |
 | jupyter/lab/cuda | `nvidia/cuda` | ○ | ○ | ○ | × |
-| jupyter/lab/pytorch | `nvidia/cuda` | ○ | ○ | ○ | × |
 | jupyter/vscode/ubuntu | `ubuntu` | ○ | × | ○ | ○ |
 | jupyter/vscode/cuda | `nvidia/cuda` | ○ | ○ | ○ | ○ |
-| jupyter/vscode/pytorch | `nvidia/cuda` | ○ | ○ | ○ | ○ |
