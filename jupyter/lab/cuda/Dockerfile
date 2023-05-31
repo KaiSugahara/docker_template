@@ -16,13 +16,11 @@ CMD ["/start.sh"]
 SHELL ["/bin/bash", "-c"]
 
 # UPDATE & INSTALL
-RUN /bin/bash
 RUN apt update
 RUN apt-get update
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt -y install tzdata
 ENV TZ=Asia/Tokyo
-RUN apt -y install sudo python3-pip language-pack-ja-base language-pack-ja git
+RUN apt-get -y install tzdata sudo python3-pip git
 
 # USERADD
 RUN groupadd -g ${YOUR_GID} ${CONTAINER_USER_NAME}
