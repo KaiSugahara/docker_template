@@ -47,6 +47,7 @@ RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
 
 # INSTALL JUPYTER & LIBRARIES
 COPY requirements.txt /home/${CONTAINER_USER_NAME}
+RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 RUN rm -f /home/${CONTAINER_USER_NAME}/requirements.txt
 
