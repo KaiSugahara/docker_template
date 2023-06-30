@@ -1,0 +1,9 @@
+jupyterlab
+jupyterlab-git
+numpy
+pandas
+scikit-learn
+tqdm
+matplotlib
+seaborn
+polars
