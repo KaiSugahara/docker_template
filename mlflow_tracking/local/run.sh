@@ -32,9 +32,6 @@ esac
 echo "MLflow Tracking Server を立てるポート番号を指定してください: "
 read -p "> " MLFLOW_PORT
 
-echo $IMAGE_NAME
-echo $CONTAINER_NAME
-echo $MLFLOW_PORT
 export IMAGE_NAME CONTAINER_NAME MLFLOW_PORT
 
 # CHECK MAKE DIR.
