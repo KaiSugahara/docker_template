@@ -1,0 +1,21 @@
+version: "3"
+services:
+  tracking:
+    image: ${IMAGE_NAME}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${CONTAINER_NAME}
+    ports:
+      - ${MLFLOW_PORT}:${MLFLOW_PORT}
+    restart: always
+    command: mlflow server --backend-store-uri /mlruns --host 0.0.0.0 --port ${MLFLOW_PORT}
+    volumes:
+      - ${HOME}/mlruns:/mlruns
+      - ${HOME}/mlartifacts:/mlartifacts
+    networks:
+      - mlflow-network
+
+networks:
+  mlflow-network:
+    name: ${CONTAINER_NAME}_network
