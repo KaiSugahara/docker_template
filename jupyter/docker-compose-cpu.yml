@@ -1,9 +1,11 @@
 version: '3'
 services:
-  jupyter_cuda_on_vscode:
+  jupyter:
     build:
       context: .
       args:
+        - BASE_IMAGE_NAME=${BASE_IMAGE_NAME}
+        - START_SHELL_FILE_NAME=${START_SHELL_FILE_NAME}
         - YOUR_UID=${YOUR_UID}
         - YOUR_GID=${YOUR_GID}
         - CONTAINER_USER_NAME=${CONTAINER_USER_NAME}
@@ -11,14 +13,9 @@ services:
     image: ${IMAGE_NAME}
     container_name: ${CONTAINER_NAME}
     ports:
-      - '${SSH_PORT}:22'
+      - ${JUPYTER_PORT}:${JUPYTER_PORT}
     volumes:
       - ${HOME}:/home/${CONTAINER_USER_NAME}/@HOST_HOME
       - ${HOME}/.jupyter:/home/${CONTAINER_USER_NAME}/.jupyter
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    environment:
+      - JUPYTER_PORT=${JUPYTER_PORT}

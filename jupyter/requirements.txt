@@ -6,4 +6,4 @@ scikit-learn
 tqdm
 matplotlib
 seaborn
-polars
+# polars
