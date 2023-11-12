@@ -1,0 +1,20 @@
+version: '3'
+services:
+  jupyter:
+    build:
+      context: .
+      args:
+        - BASE_IMAGE_NAME=${BASE_IMAGE_NAME}
+        - START_SHELL_FILE_NAME=${START_SHELL_FILE_NAME}
+        - YOUR_UID=${YOUR_UID}
+        - YOUR_GID=${YOUR_GID}
+        - CONTAINER_USER_NAME=${CONTAINER_USER_NAME}
+        - CONTAINER_USER_PASSWORD=${CONTAINER_USER_PASSWORD}
+    image: ${IMAGE_NAME}
+    container_name: ${CONTAINER_NAME}
+    network_mode: host
+    volumes:
+      - ${HOME}:/home/${CONTAINER_USER_NAME}/@HOST_HOME
+      - ${HOME}/.jupyter:/home/${CONTAINER_USER_NAME}/.jupyter
+    environment:
+      - JUPYTER_PORT=${JUPYTER_PORT}
