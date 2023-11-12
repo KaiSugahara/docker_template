@@ -1,0 +1,18 @@
+version: "3"
+services:
+  tracking:
+    image: ${IMAGE_NAME}
+    container_name: ${CONTAINER_NAME}
+    build:
+      context: .
+      args:
+        - YOUR_UID=${YOUR_UID}
+        - YOUR_GID=${YOUR_GID}
+      dockerfile: ./Dockerfile
+    ports:
+      - ${MLFLOW_PORT}:80
+    restart: always
+    command: /usr/local/bin/mlflow server --app-name basic-auth --backend-store-uri sqlite:///mlflow/mlruns.db --artifacts-destination /mlflow/mlartifacts --host 0.0.0.0 --port 80
+    volumes:
+      - ${MLFLOW_DIR_PATH}:/mlflow
+      - ./changeAdminPassword.py:/changeAdminPassword.py
