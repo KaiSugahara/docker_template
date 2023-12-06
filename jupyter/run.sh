@@ -77,6 +77,9 @@ read -p "> " JUPYTER_PORT
 # Make container
 ############################################################
 
+# MAKE CONFIG DIR. FOR JUPYTER
+mkdir -p ${HOME}/.jupyter
+
 # ENCRYPT PASSWORD
 CONTAINER_USER_PASSWORD=`openssl passwd -6 -salt $(openssl rand -base64 6) ${CONTAINER_USER_PASSWORD}`
 
