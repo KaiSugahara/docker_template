@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nginx-transfer:
+    image: nginx-transfer
+    container_name: ${CONTAINER_NAME}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NETWORK_ACCESS: internal
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+    restart: always
+    networks:
+      - nginx-network
+networks:
+  nginx-network:
+    external: true

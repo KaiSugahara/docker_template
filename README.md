@@ -1,6 +1,23 @@
 # docker_template
 
-### Link
+- 個人用
+- 各用途に合わせたdocker-compose.ymlとシェルスクリプトのテンプレート
+- 確認：Oracle Cloud Infrastructure インスタンス（Canonical Ubuntu 20.04, VM.Standard.A1.Flex）
 
-- [研究用サーバにJupyter環境をつくる【Docker】](https://scrapbox.io/uecokmt/%E7%A0%94%E7%A9%B6%E7%94%A8%E3%82%B5%E3%83%BC%E3%83%90%E3%81%ABJupyter%E7%92%B0%E5%A2%83%E3%82%92%E3%81%A4%E3%81%8F%E3%82%8B%E3%80%90Docker%E3%80%91)
-- [MLflow Tracking Serverを研究室サーバに立てる【Docker】](https://scrapbox.io/uecokmt/MLflow_Tracking_Server%E3%82%92%E7%A0%94%E7%A9%B6%E5%AE%A4%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E7%AB%8B%E3%81%A6%E3%82%8B%E3%80%90Docker%E3%80%91)
+## Webサーバ系
+| template_name | base-image(s) | depends_on | 説明 | 注意 |
+| :---: | :---: | :---: | :---: | :---: |
+| nginx-proxy | `jwilder/nginx-proxy:latest`<br>`rcs/letsencrypt-nginx-proxy-companion:latest` | - | リバースプロキシ<br>Let’s EncryptのSSL証明書 | - |
+| mysql | `mysql:oracle`<br>`arm64v8/phpmyadmin` | `nginx-proxy` | MySQL<br>phpmyadmin | ARMアーキテクチャ用のdockerイメージを使用。環境に合わせて編集してください。 |
+| wordpress | `wordpress:latest` | `mysql`<br>`nginx-proxy` | WordPress | - |
+| flask | `ubuntu:latest` | - | - | - |
+
+## ML
+- UbuntuイメージベースにJupyterLab環境を構築
+
+| template_name | base-image(s) | CPU | GPU | JupyterLab | VSCode（Remote Development） |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| jupyter/lab/ubuntu | `ubuntu` | ○ | × | ○ | × |
+| jupyter/lab/cuda | `nvidia/cuda` | ○ | ○ | ○ | × |
+| jupyter/vscode/ubuntu | `ubuntu` | ○ | × | ○ | ○ |
+| jupyter/vscode/cuda | `nvidia/cuda` | ○ | ○ | ○ | ○ |
