@@ -3,9 +3,12 @@ services:
   code_server:
     build:
       context: .
+      args:
+        - YOUR_UID=${YOUR_UID}
+        - YOUR_GID=${YOUR_GID}
     image: ${IMAGE_NAME}
     container_name: ${CONTAINER_NAME}
     ports:
       - ${CODE_PORT}:8080
     volumes:
-      - ${HOME}:/home/ubuntu/@HOST_HOME
+      - ${HOME}:/home/user/@HOST_HOME

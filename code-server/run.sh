@@ -26,7 +26,8 @@ echo "cert: false" >> config.yaml
 ############################################################
 
 # # EXPORT VARIABLE(S)
-export CONTAINER_NAME IMAGE_NAME CODE_PORT
+export YOUR_UID=`id -u` YOUR_GID=`id -g`
+export CONTAINER_NAME IMAGE_NAME CODE_PORT YOUR_UID YOUR_GID
 
 # DOCKER-COMPOSE
 docker-compose build --no-cache --pull
