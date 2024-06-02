@@ -13,3 +13,4 @@ services:
     volumes:
       - ${HOME}:/home/jupyter/@HOST_HOME
       - ${HOME}/.jupyter:/home/jupyter/.jupyter
+      - ./user-settings:/home/jupyter/.jupyter/lab/user-settings

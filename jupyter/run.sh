@@ -58,7 +58,7 @@ read -p "> " JUPYTER_PORT
 ##############################
 
 # Make jupyter config dir. in host
-mkdir -p ${HOME}/.jupyter
+mkdir -p ${HOME}/.jupyter/lab/user-settings
 
 # Export variables
 export YOUR_UID=`id -u` YOUR_GID=`id -g`
