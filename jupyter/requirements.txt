@@ -1,5 +1,13 @@
+# Jupyter Lab
 jupyterlab
 jupyterlab-git
+
+# Code Formatter
+jupyterlab_code_formatter
+black
+isort
+
+# ML Libraries
 numpy
 pandas
 scikit-learn
