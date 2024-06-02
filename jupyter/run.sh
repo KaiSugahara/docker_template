@@ -1,10 +1,10 @@
-!/bin/bash
+#!/bin/bash
 
-############################################################
-# Ready for docker-compose files
-############################################################
+##############################
+# Container Settings
+##############################
 
-echo "1. 作成するコンテナタイプ番号を入力してください
+echo "Step1: Select and type in the container you wish to create
  [0] ubuntu (Jupyter Lab)
  [1] cuda11 (Jupyter Lab)
  [2] cuda12 (Jupyter Lab)
@@ -18,75 +18,54 @@ case $CONTAINER_TYPE in
         # ubuntu
         BASE_IMAGE_NAME="ubuntu:latest"
         COMPOSE_FILE_NAME="docker-compose-cpu.yml"
-        START_SHELL_FILE_NAME="start-lab.sh"
         ;;
     1)
         # cuda11
         BASE_IMAGE_NAME="nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04"
         COMPOSE_FILE_NAME="docker-compose-gpu.yml"
-        START_SHELL_FILE_NAME="start-lab.sh"
         ;;
     2)
         # cuda12
         BASE_IMAGE_NAME="nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04"
         COMPOSE_FILE_NAME="docker-compose-gpu.yml"
-        START_SHELL_FILE_NAME="start-lab.sh"
         ;;
     3)
         # ubuntu
         BASE_IMAGE_NAME="ubuntu:latest"
         COMPOSE_FILE_NAME="docker-compose-cpu.yml"
-        START_SHELL_FILE_NAME="start-ssh.sh"
         ;;
     4)
         # cuda11
         BASE_IMAGE_NAME="nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04"
         COMPOSE_FILE_NAME="docker-compose-gpu.yml"
-        START_SHELL_FILE_NAME="start-ssh.sh"
         ;;
     5)
         # cuda12
         BASE_IMAGE_NAME="nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04"
         COMPOSE_FILE_NAME="docker-compose-gpu.yml"
-        START_SHELL_FILE_NAME="start-ssh.sh"
         ;;
     *)
-        echo "Error: 存在しないコンテナ番号のため中断しました"
+        echo "Error: Aborted because a non-existent container number was typed in"
         exit 1
         ;;
 esac
 
-############################################################
-# Input container settings
-############################################################
-
-echo "2. 作成するコンテナ名を入力してください（例「yourname_ubuntu」）"
-read -p "> " CONTAINER_NAME
-
-echo "3. 作成するイメージ名を入力してください（例「yourname/ubuntu」）"
-read -p "> " IMAGE_NAME
-
-echo "4. コンテナユーザのパスワードを入力してください"
-read -sp "入力内容は表示されません> ********** " CONTAINER_USER_PASSWORD
-echo ""
-
-echo "5. Jupyterに接続するためのポート番号を入力してください"
+echo "Step2: Type in the container's port"
 read -p "> " JUPYTER_PORT
 
-############################################################
+##############################
 # Make container
-############################################################
+##############################
 
-# MAKE CONFIG DIR. FOR JUPYTER
+# Make jupyter config dir. in host
 mkdir -p ${HOME}/.jupyter
 
-# ENCRYPT PASSWORD
-CONTAINER_USER_PASSWORD=`openssl passwd -6 -salt $(openssl rand -base64 6) ${CONTAINER_USER_PASSWORD}`
+# Export variables
+export YOUR_UID=`id -u` YOUR_GID=`id -g`
+export BASE_IMAGE_NAME JUPYTER_PORT
+export IMAGE_NAME="jupyter/${JUPYTER_PORT}"
+export CONTAINER_NAME="jupyter-${JUPYTER_PORT}"
 
-# EXPORT VARIABLE(S)
-export YOUR_UID=`id -u` YOUR_GID=`id -g` CONTAINER_USER_NAME=`id -un`
-export BASE_IMAGE_NAME START_SHELL_FILE_NAME CONTAINER_NAME IMAGE_NAME CONTAINER_USER_PASSWORD JUPYTER_PORT
-
-# DOCKER-COMPOSE
+# Make
 docker-compose -f ${COMPOSE_FILE_NAME} build --no-cache --pull
 docker-compose -f ${COMPOSE_FILE_NAME} -p $CONTAINER_NAME up -d

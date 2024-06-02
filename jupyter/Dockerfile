@@ -1,52 +1,39 @@
+# SELECT BASE IMAGE
 ARG BASE_IMAGE_NAME
-
 FROM ${BASE_IMAGE_NAME}
 USER root
 
-# ARGS
-ARG START_SHELL_FILE_NAME
-ARG YOUR_UID
-ARG YOUR_GID
-ARG CONTAINER_USER_NAME
-ARG CONTAINER_USER_PASSWORD
-
-# ADD FILES
-COPY ${START_SHELL_FILE_NAME} /start.sh
-RUN chmod +rx /start.sh
-CMD ["/start.sh"]
-
-# BASH
+# SELECT BASH
 SHELL ["/bin/bash", "-c"]
 
 # UPDATE & INSTALL
-RUN apt update
-RUN apt-get update
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=Asia/Tokyo
-RUN apt-get -y install tzdata sudo python3-pip git openssh-server
-RUN mkdir /var/run/sshd
+RUN apt update && apt-get update
+RUN apt -y install sudo git
 
 # USERADD
-RUN groupadd -g ${YOUR_GID} ${CONTAINER_USER_NAME}
-RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} -g ${YOUR_GID} ${CONTAINER_USER_NAME}
-RUN gpasswd -a ${CONTAINER_USER_NAME} sudo
-
-# CHANGE USER PASSWORD
+ARG YOUR_UID
+ARG YOUR_GID
+RUN groupadd -f -g ${YOUR_GID} jupyter
+RUN useradd -m -s /bin/bash -N -u ${YOUR_UID} -g ${YOUR_GID} -G sudo jupyter
 RUN echo "root:password" | chpasswd
-RUN echo "${CONTAINER_USER_NAME}:${CONTAINER_USER_PASSWORD}" | chpasswd -e
+RUN echo "jupyter:password" | chpasswd
+
+# INSTALL python3
+RUN apt -y install python3-pip python3-venv
 
 # CHANGE USER
 USER ${YOUR_UID}
+WORKDIR /home/jupyter
 
-# CHANGE WORK DIR
-WORKDIR /home/${CONTAINER_USER_NAME}
+# SET LOCALE
+RUN echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
 
-# ADD BASHRC
-RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.bashrc
-RUN echo "export LANG=ja_JP.UTF-8" >> $HOME/.bashrc
+# INSTALL JUPYTER & OTHER LIBRARIES
+RUN python3 -m venv ~/.venv
+COPY requirements.txt /home/jupyter
+RUN source ~/.venv/bin/activate && pip3 install --upgrade pip  && pip3 install -r requirements.txt
+RUN rm -f ~/requirements.txt
 
-# INSTALL JUPYTER & LIBRARIES
-COPY requirements.txt /home/${CONTAINER_USER_NAME}
-RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
-RUN rm -f /home/${CONTAINER_USER_NAME}/requirements.txt
+# RUN JUPYTER LAB
+CMD ["/bin/bash", "-c", "source ~/.venv/bin/activate && export SHELL=/bin/bash && jupyter lab --ip=0.0.0.0 --no-browser --port=8888"]
