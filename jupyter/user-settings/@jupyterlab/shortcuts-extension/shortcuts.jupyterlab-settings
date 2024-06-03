@@ -1,0 +1,18 @@
+{
+    "shortcuts": [
+        {
+            "command": "notebook:restart-clear-output",
+            "keys": [
+                "Alt O"
+            ],
+            "selector": "body"
+        },
+        {
+            "command": "notebook:restart-run-all",
+            "keys": [
+                "Alt R"
+            ],
+            "selector": "body"
+        }
+    ]
+}
