@@ -7,9 +7,9 @@
     // Theme CSS Overrides
     // Override theme CSS variables by setting key-value pairs here
     "overrides": {
-        "code-font-size": "12px",
-        "content-font-size1": "12px",
-        "ui-font-size1": "12px"
+        "code-font-size": "10px",
+        "content-font-size1": "10px",
+        "ui-font-size1": "10px"
     },
 
     // Selected Theme

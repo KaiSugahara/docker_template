@@ -6,7 +6,7 @@
 
     // Font size
     // The font size used to render text.
-    "fontSize": 12,
+    "fontSize": 10,
 
     // Theme
     // The theme for the terminal.
