@@ -7,10 +7,7 @@
 echo "Step1: Select and type in the container you wish to create
  [0] ubuntu (Jupyter Lab)
  [1] cuda11 (Jupyter Lab)
- [2] cuda12 (Jupyter Lab)
- [3] ubuntu (SSH)
- [4] cuda11 (SSH)
- [5] cuda12 (SSH)"
+ [2] cuda12 (Jupyter Lab)"
 read -p "> " CONTAINER_TYPE
 
 case $CONTAINER_TYPE in
@@ -25,21 +22,6 @@ case $CONTAINER_TYPE in
         COMPOSE_FILE_NAME="docker-compose-gpu.yml"
         ;;
     2)
-        # cuda12
-        BASE_IMAGE_NAME="nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04"
-        COMPOSE_FILE_NAME="docker-compose-gpu.yml"
-        ;;
-    3)
-        # ubuntu
-        BASE_IMAGE_NAME="ubuntu:latest"
-        COMPOSE_FILE_NAME="docker-compose-cpu.yml"
-        ;;
-    4)
-        # cuda11
-        BASE_IMAGE_NAME="nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04"
-        COMPOSE_FILE_NAME="docker-compose-gpu.yml"
-        ;;
-    5)
         # cuda12
         BASE_IMAGE_NAME="nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04"
         COMPOSE_FILE_NAME="docker-compose-gpu.yml"
@@ -67,5 +49,5 @@ export IMAGE_NAME="jupyter/${JUPYTER_PORT}"
 export CONTAINER_NAME="jupyter-${JUPYTER_PORT}"
 
 # Make
-docker-compose -f ${COMPOSE_FILE_NAME} build --no-cache --pull
-docker-compose -f ${COMPOSE_FILE_NAME} -p $CONTAINER_NAME up -d
+docker compose -f ${COMPOSE_FILE_NAME} build --no-cache --pull
+docker compose -f ${COMPOSE_FILE_NAME} -p $CONTAINER_NAME up -d
