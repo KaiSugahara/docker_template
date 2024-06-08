@@ -13,6 +13,13 @@
                 "Alt R"
             ],
             "selector": "body"
+        },
+        {
+            "command": "terminal:open",
+            "keys": [
+                "Alt T"
+            ],
+            "selector": "body"
         }
     ]
 }
