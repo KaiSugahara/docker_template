@@ -1,4 +1,3 @@
-version: '3'
 services:
   code_server:
     build:
@@ -9,7 +8,5 @@ services:
     image: ${IMAGE_NAME}
     container_name: ${CONTAINER_NAME}
     ports:
-      - ${CODE_PORT}:8080
-    volumes:
-      - ${HOME}:/home/user/@HOST_HOME
+      - ${CODE_PORT}:8000
     restart: always
