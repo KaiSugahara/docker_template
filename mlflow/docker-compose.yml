@@ -1,4 +1,3 @@
-version: "3"
 services:
   tracking:
     image: ${IMAGE_NAME}
@@ -13,3 +12,8 @@ services:
     volumes:
       - ${MLFLOW_DIR_PATH}:/mlflow
       - ./change_admin_password.py:/change_admin_password.py
+    networks:
+      - nginx-network
+networks:
+  nginx-network:
+    external: true
