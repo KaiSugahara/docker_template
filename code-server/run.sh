@@ -10,17 +10,14 @@ read -p "> " CONTAINER_NAME
 echo "2. 作成するイメージ名を入力してください（例「yourname/ubuntu」）"
 read -p "> " IMAGE_NAME
 
-echo "3. code-serverの起動ポート番号を入力してください"
-read -p "> " CODE_PORT
-
 ############################################################
 # Make container
 ############################################################
 
 # # EXPORT VARIABLE(S)
 export YOUR_UID=`id -u` YOUR_GID=`id -g`
-export CONTAINER_NAME IMAGE_NAME CODE_PORT YOUR_UID YOUR_GID
+export CONTAINER_NAME IMAGE_NAME YOUR_UID YOUR_GID
 
 # DOCKER-COMPOSE
-docker-compose build --no-cache --pull
-docker-compose -p $CONTAINER_NAME up -d
+docker compose build --pull
+docker compose -p $CONTAINER_NAME up -d

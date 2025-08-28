@@ -7,6 +7,10 @@ services:
         - YOUR_GID=${YOUR_GID}
     image: ${IMAGE_NAME}
     container_name: ${CONTAINER_NAME}
-    ports:
-      - ${CODE_PORT}:8000
+    expose:
+      - 8000
     restart: always
+networks:
+  default:
+    name: nginx-network
+    external: true
